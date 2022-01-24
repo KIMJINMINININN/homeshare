@@ -1,49 +1,54 @@
+import Profile from "../../components/Profile";
 import css from "styled-jsx/css";
-import fetch from "isomorphic-unfetch";
+import { formatDistance } from "date-fns";
+import Repository from "../../components/Repositories";
 
 const style = css`
-    .profile-box{
-        width: 25%;
-        max-width: 272px;
-        margin-right: 26px;
-    }
-`
-const name = ({ user }) => {
-    console.log("name Component");
-    if(!user){
-        return null;
-    }
+  .user-contents-wrapper {
+    display: flex;
+    padding: 20px;
+  }
+`;
 
-    return (
-        <>
-            <div className="profile-box">
-                <div className="profile-image-wrapper">
-                    <img className="profile-image" src={user.avatar_url} alt={`${user.name} 프로필 이미지`} />
-                </div>
-                <h2 className="profile-username">{user.name}</h2>
-                <p className="profile-user-login">{user.login}</p>
-                <p className="profile-user-bio">{user.bio}</p>
-            </div>
-            <style jsx>{style}</style>
-        </>
-    )
-}
+const name = ({ user, repos }) => {
+  if (!user && !repos) {
+    return null;
+  }
+
+  console.log("user : ", user);
+  console.log("repos : ", repos);
+  return (
+    <div className="user-contents-wrapper">
+      <Profile user={user} />
+      <Repository user={user} repos={repos} />
+      <style jsx>{style}</style>
+    </div>
+  );
+};
 
 export const getServerSideProps = async ({ query }) => {
-    console.log("getServerSideProps");
+  console.log("getServerSideProps");
 
-    const {name} = query;
-    try{
-        const res = await fetch(`https://api.github.com/users/${name}`);
-        if(res.status === 200){
-            const user = await res.json();
-            return {props: {user}};
-        }
-        return {props: {}};
-    } catch(e) {
-        console.log(e);
-        return {props:{}};
+  const { name, page } = query;
+  try {
+    let user;
+    let repos;
+    const userRes = await fetch(`https://api.github.com/users/${name}`);
+    if (userRes.status === 200) {
+      user = await userRes.json();
     }
+    const repoRes = await fetch(
+      `https://api.github.com/users/${name}/repos?sort=updated&page=${page}&per_page=10`
+    );
+    if (repoRes.status == 200) {
+      repos = await repoRes.json();
+    }
+    // console.log(repos);
+    return { props: { user, repos } };
+  } catch (e) {
+    console.log(e);
+    return { props: {} };
+  }
 };
 
 export default name;
