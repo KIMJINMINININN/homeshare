@@ -40,7 +40,7 @@ const Header = () => {
   const router = useRouter();
   const onSubmit = (e) => {
     e.preventDefault();
-    router.push("/users/${username}");
+    router.push(`/users/${username}`);
     setUsername("");
   };
 

@@ -1,6 +1,10 @@
+import { useEffect } from "react";
 import Header from "../components/Header";
 
 const MyApp = ({ Component, pageProps }) => {
+  // useEffect(() => {
+  //   throw Error();
+  // }, []);
   return (
     <>
       <Header />
@@ -9,6 +13,7 @@ const MyApp = ({ Component, pageProps }) => {
         {`
           body {
             margin: 0;
+            font-family: Noto Sans, Noto Sans KR;
           }
         `}
       </style>
