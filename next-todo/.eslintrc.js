@@ -1,25 +1,25 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es6: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-  ],
-  parser: '@typescript-eslint/parser',
+  extends: ["airbnb"],
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
+  },
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: 2018,
+    sourceType: "module",
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-  ],
+  plugins: ["react", "@typescript-eslint"],
   rules: {
+    "linebreak-style": 0,
+    "eol-last": 0,
     quotes: ["error", "double"], //더블 쿼터 사용
     "@typescript-eslint/quotes": ["error", "double"], //더블 쿼터 사용
     "no-unused-vars": "off", //사용안한 변수 경고 중복

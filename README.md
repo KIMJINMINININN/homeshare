@@ -164,6 +164,8 @@ npx eslint --init
 -eslintrc.js
 추가해줄 rule 및 settings
 rules: {
+    "linebreak-style": 0,
+    "eol-last": 0,
     quotes: ["error", "double"], //더블 쿼터 사용
     "@typescript-eslint/quotes": ["error", "double"], //더블 쿼터 사용
     "no-unused-vars": "off", //사용안한 변수 경고 중복
@@ -221,3 +223,19 @@ rules: {
 yarn add styled-components
 yarn add @types/styled-components -D
 ```
+
+### vscode-styled-components 설치
+
+### createGlobalStyle
+
+
+### styled-reset
+
+```
+yarn add styled-reset
+```
+글로벌 스타일 리셋 하는 다른 방법으로 styled-reset을 사용하여서
+reset 시켜주는것이 편하다.
+
+글러벌 스타일안에 추가시켜주면 스타일이 적용된다.
+
