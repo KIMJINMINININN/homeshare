@@ -141,7 +141,6 @@ pages/\_error.jsx
 
 pages/404.jsx
 
-
 ## Typescript next.js 환경설정
 
 ```
@@ -224,18 +223,94 @@ yarn add styled-components
 yarn add @types/styled-components -D
 ```
 
+### styled-component 사용
+
+**className을 이용하여 스타일링 하기**
+
+```
+const Container = styled.div`
+    width: 100%;
+
+    .todo-list-header{
+        padding: 12px;
+        border-bottom: 1px solid ${palette.gray};
+
+        .todo-list-last-todo {
+            font-size: 14px;
+            span{
+                margin-left: 8px;
+            }
+        }
+    }
+`
+//....
+  <Container>
+      <div className="todo-list-header">
+          <p className="todo-list-last-todo">
+              남은 TODO<span>{todos.length}개</span>
+          </p>
+      </div>
+  </Container>
+```
+
+**태그마다 스타일링 하기**
+
+```
+const Container = styled.div`
+
+`
+
+const TodoHeader = styled.div`
+
+`
+
+//...
+
+<Container>
+  <TodoHeader>
+  </TodoHeader>
+</Container>
+```
+
+**className을 이용하여서 스타일링하는것이 유지보수 뿐만아니라 코드의 가독성이 좋다**
+
 ### vscode-styled-components 설치
 
 ### createGlobalStyle
 
+createGlobalStyle의 백틱안에 스타일을 직접 작성하면 포맷팅을 지원하지 않게된다.
+styled-components의 css 함수를 이용하면 스타일드 컴포넌트에서 사용할 css값을 변수로 만들어서 사용할수있다.
+
+```
+import { createGlobalStyle, css } from "styled-components";
+import reset from "styled-reset";
+
+const globalStyle = css`
+    ${reset};
+
+    *{
+        box-sizing: border-box;
+    }
+    body{
+        font-family: Noto Sans, Noto Sans KR;
+    }
+`;
+
+const GlobalStyle = createGlobalStyle`
+    ${globalStyle}
+`
+
+
+export default GlobalStyle;
+```
 
 ### styled-reset
 
 ```
 yarn add styled-reset
 ```
+
 글로벌 스타일 리셋 하는 다른 방법으로 styled-reset을 사용하여서
 reset 시켜주는것이 편하다.
 
-글러벌 스타일안에 추가시켜주면 스타일이 적용된다.
-
+글로벌 스타일안에 추가시켜주면 스타일이 적용된다.
