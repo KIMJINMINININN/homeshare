@@ -314,3 +314,31 @@ yarn add styled-reset
 reset 시켜주는것이 편하다.
 
 글로벌 스타일안에 추가시켜주면 스타일이 적용된다.
+
+
+## 아이콘 다운로드 https://iconmonstr.com/ 
+
+svg 확장자를 사용하는것이 성능이 제일 좋다.
+확대 및 축소를 하게되어도 이미지가 깨지지 않기 때문.
+
+## react에서 svg 사용
+### babel 플러그인 설치
+
+```
+yarn add babel-plugin-inline-react-svg -D
+```
+
+### .babelrc 설정 추가
+```
+{
+    "presets" : ["next/babel"],
+    "plugins": [["styled-components", {"ssr" : true}, "inline-react-svg"]]
+}
+```
+
+### types/image.d.ts 파일 설정
+```
+declare module "*.svg";
+```
+
+
