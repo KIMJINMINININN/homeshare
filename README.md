@@ -341,4 +341,6 @@ yarn add babel-plugin-inline-react-svg -D
 declare module "*.svg";
 ```
 
+## Next API
 
+pages/api/todos.ts 라는 파일을 만들게 되면 api/todos가 api의 경로가 된다.
