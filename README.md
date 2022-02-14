@@ -219,7 +219,7 @@ rules: {
 ## styled-component 환경설정 및 사용
 
 ```
-yarn add styled-components
+yarn add styled-components bable-plugin-styled-components
 yarn add @types/styled-components -D
 ```
 
