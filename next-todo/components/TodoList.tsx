@@ -1,11 +1,13 @@
 import React, { useMemo, useCallback, useState } from "react";
 import styled from "styled-components";
 import palette from "../styles/palette";
-import { TodoType } from "../types/todo";
 import TrashCanIcon from "../public/static/svg/trash_can.svg";
 import CheckMarkIcon from "../public/static/svg/check_mark.svg";
 import { checkTodoAPI, deleteTodoAPI} from "../lib/api/todo";
 import { useRouter } from "next/router";
+import { useSelector } from "../store";
+import { todoActions } from "../store/todo";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
     width: 100%;
@@ -123,12 +125,8 @@ const Container = styled.div`
     }
 `;
 
-interface IProps {
-    todos: TodoType[];
-}
-
-const TodoList: React.FC<IProps> = ({ todos }) => {
-
+const TodoList: React.FC = () => {
+    const todos = useSelector((state) => state.todo.todos);
     //색깔 객체 구하기
     const getTodoColorNums = useCallback(() => {
         let red = 0;
@@ -176,23 +174,24 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
     const todoColorNums: any = useMemo(getTodoColorNums, [todos]);
     const router = useRouter();
     const [localTodos, setLocalTodos] = useState(todos);
+    const dispatch = useDispatch();
     //투두 체크하기
     const checkTodo = async( id : number) => {
         try {
             await checkTodoAPI(id);
-            console.log("체크하였습니다.");
             //체크 적용하는 방법1(데이터 다시받기)
             // router.reload();
             //체크 적용하는 방법2(데이터 다시받기)
             // router.push("/");
             //체크 적용하는 방법3(data를 local로 저장하여 사용)
-            const newTodos = localTodos.map((todo) => {
+            const newTodos = todos.map((todo) => {
                 if(todo.id === id){
                     return {...todo, checked: !todo.checked};
                 }
                 return todo;
             });
-            setLocalTodos(newTodos);
+            dispatch(todoActions.setTodo(newTodos));
+            console.log("체크하였습니다.");
         }catch(e){
             console.log(e);
         }
@@ -201,8 +200,8 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
     const deleteTodo = async (id: number) => {
         try{
             await deleteTodoAPI(id);
-            const newTodos = localTodos.filter((todo) => todo.id !== id);
-            setLocalTodos(newTodos);
+            const newTodos = todos.filter((todo) => todo.id !== id);
+            dispatch(todoActions.setTodo(newTodos));
             console.log("삭제했습니다.");
         }catch(e){
             console.log(e);

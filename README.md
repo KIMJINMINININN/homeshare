@@ -315,13 +315,13 @@ reset 시켜주는것이 편하다.
 
 글로벌 스타일안에 추가시켜주면 스타일이 적용된다.
 
-
-## 아이콘 다운로드 https://iconmonstr.com/ 
+## 아이콘 다운로드 https://iconmonstr.com/
 
 svg 확장자를 사용하는것이 성능이 제일 좋다.
 확대 및 축소를 하게되어도 이미지가 깨지지 않기 때문.
 
 ## react에서 svg 사용
+
 ### babel 플러그인 설치
 
 ```
@@ -329,6 +329,7 @@ yarn add babel-plugin-inline-react-svg -D
 ```
 
 ### .babelrc 설정 추가
+
 ```
 {
     "presets" : ["next/babel"],
@@ -337,6 +338,7 @@ yarn add babel-plugin-inline-react-svg -D
 ```
 
 ### types/image.d.ts 파일 설정
+
 ```
 declare module "*.svg";
 ```
@@ -345,4 +347,26 @@ declare module "*.svg";
 
 pages/api/todos.ts 라는 파일을 만들게 되면 api/todos가 api의 경로가 된다.
 
-## 
+## Redux toolkit
+
+리덕스를 쉽게 작성할수있고 더 나은 리덕스 코드를 작성하기 위한 방법
+
+```
+yarn add @reduxjs/toolkit
+```
+
+### useSelector
+
+리덕스 스토어의 값을 가져올수있고
+타입을 알수없으므로 타입을 가져와서 지정해야한다.
+
+### TypedUseSelectorHook
+
+useSelector에 타입을 지정해서 사용하는 방법.
+커스텀 useSelector를 만들수있다.
+
+```
+import { TypedUseSelectorHook, useSelector as useReduxSelector } from "react-redux";
+
+export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
+```
