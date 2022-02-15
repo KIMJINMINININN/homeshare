@@ -219,7 +219,7 @@ rules: {
 ## styled-component 환경설정 및 사용
 
 ```
-yarn add styled-components bable-plugin-styled-components
+yarn add styled-components babel-plugin-styled-components
 yarn add @types/styled-components -D
 ```
 
@@ -369,4 +369,13 @@ useSelector에 타입을 지정해서 사용하는 방법.
 import { TypedUseSelectorHook, useSelector as useReduxSelector } from "react-redux";
 
 export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
+```
+
+## React Modal => React Portal 사용
+
+부모 컴포넌트 DOM 계층 외부에 있는 DOM 노드로 자식을 렌더링하는 방법
+
+```
+//react Component, Component를 넣을 DOM
+ReactDOM.createPortal(child, container)
 ```
