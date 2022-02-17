@@ -18,7 +18,8 @@ module.exports = {
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "import"
     ],
     "rules": {
         quotes: ["error", "double"], //더블 쿼터 사용
@@ -52,16 +53,6 @@ module.exports = {
             1,
             { extensions: [".js", ".jsx", ".tsx"] }, //jsx사용가능한 확장자 설정
         ],
-        "import/extensions": [
-            "error",
-            "ignorePackages",
-            {
-                js: "never",
-                jsx: "never",
-                ts: "never",
-                tsx: "never",
-            }, //import 시 확장자명은 사용하지 않는다.
-        ],
     },
     settings: {
         "import/resolver": {
@@ -71,3 +62,15 @@ module.exports = {
         },
     }
 }
+
+
+// "import/extensions": [
+//     "error",
+//     "ignorePackages",
+//     {
+//         js: "never",
+//         jsx: "never",
+//         ts: "never",
+//         tsx: "never",
+//     }, //import 시 확장자명은 사용하지 않는다.
+// ],
