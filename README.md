@@ -379,3 +379,10 @@ export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 //react Component, Component를 넣을 DOM
 ReactDOM.createPortal(child, container)
 ```
+
+## Next-Redux
+
+```
+yarn add redux react-redux next-redux-wrapper redux-devtools-extension
+yarn add @types/react-redux -D
+```
