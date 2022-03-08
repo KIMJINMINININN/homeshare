@@ -386,3 +386,9 @@ ReactDOM.createPortal(child, container)
 yarn add redux react-redux next-redux-wrapper redux-devtools-extension
 yarn add @types/react-redux -D
 ```
+
+## jwt 사용
+
+```
+yarn add jsonwebtoken @types/jsonwebtoken
+```

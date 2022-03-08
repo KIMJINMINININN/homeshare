@@ -7,9 +7,10 @@ import MailIcon from "../../public/static/svg/logo/mail.svg";
 import OpenedEyeIcon from "../../public/static/svg/logo/eye.svg";
 import CloseEyeIcon from "../../public/static/svg/logo/close_eye.svg";
 import Input from "../common/Input";
-import {dayList, monthList, yearList} from "../../lib/staticData";
+import { dayList, monthList, yearList } from "../../lib/staticData";
 import Selector from "../common/Selector";
 import Button from "../common/Button";
+import { signupAPI } from "../../lib/api/auth";
 
 const Container = styled.form`
     width : 568px;
@@ -108,17 +109,36 @@ const SignUpModal: React.FC = () => {
     }
 
     //생년월일 일 변경
-    const onChangeBirthDay = (event:React.ChangeEvent<HTMLSelectElement>) => {
+    const onChangeBirthDay = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setBirthDay(event.target.value);
     };
 
     //생년월일 년 변경
-    const onChangeBirthYear = (event:React.ChangeEvent<HTMLSelectElement>) => {
+    const onChangeBirthYear = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setBirthYear(event.target.value);
     };
 
+    //회원 가입 폼 제출
+    const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        try {
+            const signUpBody = {
+                email,
+                lastname,
+                firstname,
+                password,
+                birthday: new Date(
+                    `${birthYear}-${birthMonth!.replace("월", "")}-${birthDay}`
+                ).toISOString(),
+            };
+            const { data } = await signupAPI(signUpBody);
+        } catch (e) {
+            console.log(e);
+        }
+    }
     return (
-        <Container>
+        <Container onSubmit={onSubmitSignUp}>
             <CloseXIcon className="modal-close-x-icon" />
             <div className="input-wrapper">
                 <Input placeholder="이메일 주소" type="email" icon={<MailIcon />} name="email" value={email} onChange={onChangeEmail} />
@@ -139,13 +159,13 @@ const SignUpModal: React.FC = () => {
             </p>
             <div className="sign-up-modal-birthday-selectors">
                 <div className="sign-up-modal-birthday-month-selector">
-                    <Selector options={monthList} disabledOptions={["월"]} defaultValue="월" value={birthMonth} onChange={onChangeBirthMonth}/>
+                    <Selector options={monthList} disabledOptions={["월"]} defaultValue="월" value={birthMonth} onChange={onChangeBirthMonth} />
                 </div>
                 <div className="sign-up-modal-birthday-day-selector">
-                    <Selector options={dayList} disabledOptions={["일"]} defaultValue="일" value={birthDay} onChange={onChangeBirthDay}/>
+                    <Selector options={dayList} disabledOptions={["일"]} defaultValue="일" value={birthDay} onChange={onChangeBirthDay} />
                 </div>
                 <div className="sign-up-modal-birthday-year-selector">
-                    <Selector options={yearList} disabledOptions={["년"]} defaultValue="년" value={birthYear} onChange={onChangeBirthYear}/>
+                    <Selector options={yearList} disabledOptions={["년"]} defaultValue="년" value={birthYear} onChange={onChangeBirthYear} />
                 </div>
             </div>
             <div className="sign-up-modal-submit-button-wrapper">
