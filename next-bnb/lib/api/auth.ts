@@ -1,4 +1,5 @@
 import axios from "axios";
+import {UserType} from "../../types/user";
 
 // 회원가입 body
 interface SingUpAPIBody {

@@ -392,3 +392,9 @@ yarn add @types/react-redux -D
 ```
 yarn add jsonwebtoken @types/jsonwebtoken
 ```
+
+## Redux 설정 모듈
+```
+yarn add next-redux-wrapper @reduxjs/toolkit react-redux redux
+yarn add @types/react-redux
+```

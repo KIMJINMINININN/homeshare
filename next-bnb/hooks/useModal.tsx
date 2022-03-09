@@ -1,5 +1,4 @@
 //Modal을 편하게 사용하기위해 hooks를 만들어냄
-
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
