@@ -1,10 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import palette from "../../styles/palette";
 import RedXIcon from "../../public/static/svg/auth/red_x_icon.svg";
 import GreenCheckIcon from "../../public/static/svg/auth/green_check_icon.svg";
+import styled from "styled-components";
 
-const Container = styled.p<{isValid: boolean}>`
+const Container = styled.p<{ isValid: boolean }>`
     color: ${({ isValid }) => isValid ? palette.davidson_orange : palette.green};
     line-height : 1.5;
     display: flex;

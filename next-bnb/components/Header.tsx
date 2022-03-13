@@ -1,15 +1,16 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import styled from "styled-components";
 import AirbnbLogoIcon from "../public/static/svg/logo/logo.svg";
 import AirbnbLogoTextIcon from "../public/static/svg/logo/logo_text.svg";
 import palette from "../styles/palette";
 import SignUpModal from "./auth/SignUpModal";
 import useModal from "../hooks/useModal";
-import { useDispatch, useSelector } from "react-redux";
 import HamburgerIcon from "../public/static/svg/header/hamburger.svg";
 import { authActions } from "../store/auth";
 import AuthModal from "./auth/AuthModal";
+import styled from "styled-components";
+import { useSelector } from "../store";
+import { useDispatch } from "react-redux";
 
 // import ModalPortal from "./ModalPortal";
 
@@ -80,7 +81,7 @@ const Container = styled.div`
                 margin-left: 8px;
                 width: 30px;
                 height: 30px;
-                border-radius: 50%50%;
+                border-radius: 50%;
             }
         }
     }
@@ -89,7 +90,7 @@ const Container = styled.div`
 const Header: React.FC = () => {
     //모달 open close
     // const [modalOpened, setModalOpened] = useState(false);
-    const { openModal, ModalPortal, closeModal} = useModal();
+    const { openModal, ModalPortal, closeModal } = useModal();
     const user = useSelector((state) => state.user);
 
     const dispatch = useDispatch();
@@ -124,7 +125,7 @@ const Header: React.FC = () => {
                 </button>
             )}
             <ModalPortal>
-                <AuthModal closeModal={closeModal}/>
+                <AuthModal closeModal={closeModal} />
             </ModalPortal>
         </Container>
     );

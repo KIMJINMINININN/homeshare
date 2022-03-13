@@ -55,9 +55,9 @@ const Container = styled.div<InputContainerProps>`
         align-items: center;
     }
     ${({ useValidation, isValid }) =>
-    useValidation &&
-    !isValid &&
-    css`
+        useValidation &&
+        !isValid &&
+        css`
       input {
         background-color: ${palette.snow};
         border-color: ${palette.orange};
@@ -67,9 +67,9 @@ const Container = styled.div<InputContainerProps>`
       }
     `}
   ${({ useValidation, isValid }) =>
-    useValidation &&
-    isValid &&
-    css`
+        useValidation &&
+        isValid &&
+        css`
       input {
         border-color: ${palette.dark_cyan};
       }
@@ -80,7 +80,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
     icon?: JSX.Element;
     label?: string;
     isValid?: boolean;
-    useValidation ?: boolean;
+    useValidation?: boolean;
     errorMessage?: string;
 }
 
