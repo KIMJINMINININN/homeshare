@@ -16,7 +16,7 @@ import ClosedEyeIcon from "../../public/static/svg/auth/closed_eye.svg";
 import PasswordWarning from "./PasswordWarning";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-
+import { authActions } from "../../store/auth";
 
 const Container = styled.form`
     width : 568px;
@@ -132,6 +132,11 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
     const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
     };
+
+    // * 로그인 모달로 변경하기
+    const changeToLoginModal = () => {
+        dispatch(authActions.setAuthMode("login"));
+    }
 
     //비밀번호 숨김
     const toggleHidePasword = () => {
@@ -308,10 +313,9 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
             </div>
             <p>
                 이미 에어비엔비에 계정이 있나요?
-                <span className="sign-up-modal-set-login" role="presentation" onClick={() => { }}>
+                <span className="sign-up-modal-set-login" role="presentation" onClick={changeToLoginModal}>
                     로그인
                 </span>
-                `
             </p>
         </Container>
     );
