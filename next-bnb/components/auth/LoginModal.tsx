@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import OpenedEyeIcon from "../../public/static/svg/logo/eye.svg";
 import { loginAPI } from "../../lib/api/auth";
+import useValidateMode from "../../hooks/useValidateMode";
 
 const Container = styled.form`
     width: 568px;
@@ -52,6 +53,8 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
 
     const dispatch = useDispatch();
 
+    const {setValidateMode} = useValidateMode();
+
     //* 비밀번호 숨김 토글하기
     const togglePasswordHiding = () => {
         setIsPasswordHided(!isPasswordHided);
@@ -74,6 +77,7 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
     //* 로그인 클릭시
     const onSubmitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setValidateMode(true);
         if (!email || !password) {
             alert("이메일과 비밀번호를 입력해주세요.");
         } else {
@@ -91,7 +95,8 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
         <Container onSubmit={onSubmitLogin}>
             <CloseXIcon className="mordal-close-x-icon" onClick={closeModal} />
             <div className="login-input-wrapper">
-                <Input placeholder="이메일 주소" name="email" type="email" icon={<MailIcon />} value={email} onChange={onChangeEmail} />
+                <Input placeholder="이메일 주소" name="email" type="email" icon={<MailIcon />} value={email} onChange={onChangeEmail} 
+                 isValid={email !== ""} errorMessage="이메일이 필요합니다."/>
             </div>
             <div className="login-input-wrapper login-password-input-wrapper">
                 <Input placeholder="비밀번호 설정하기" name="password" type={isPasswordHided ? "password" : "text"}
@@ -99,7 +104,8 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
                         isPasswordHided ? (<CloseEyeIcon onClick={togglePasswordHiding} />) : (
                             <OpenedEyeIcon onClick={togglePasswordHiding} />
                         )
-                    } value={password} onChange={onChangePassword} />
+                    } value={password} onChange={onChangePassword} 
+                    isValid={password !== ""} errorMessage="비밀번호를 입력하세요."/>
             </div>
             <div className="login-modal-submit-button-wrapper">
                 <Button type="submit">로그인</Button>

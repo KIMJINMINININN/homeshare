@@ -199,7 +199,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
 
                 dispatch(userActions.setLoggedUser(data));
 
-                closeModal()
+                closeModal();
             } catch (e) {
                 console.log(e);
             }
@@ -237,7 +237,8 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
             ),
         [password]
     );
-
+    
+    //* 컴포넌트가 사라질때 validateMode 꺼주기
     useEffect(() => {
         return () => {
             setValidateMode(false);
